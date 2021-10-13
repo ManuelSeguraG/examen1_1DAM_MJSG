@@ -5,6 +5,8 @@ var listaEntrada = listOf<String>("0", "0")
 var miNombre: String = "MANUEL JESUS SEGURA GARCIA"
 var edad: Byte = 0
 var mes: Byte = 0
+var checkEdad: Boolean = true
+var checkMes: Boolean = true
 
 // #####################################
 // DEFINICIÓN DEL CUERPO DEL PROGRAMA
@@ -15,6 +17,15 @@ var mes: Byte = 0
 fun entradaTextoDelimitador(){
     entrada = readLine() ?: ""
     listaEntrada = entrada.split(",")
+}
+
+fun chequeoValoresDentroDeRango(ed: Byte, me: Byte){
+    when(ed){
+        !in 6..12 -> checkEdad = false
+    }
+    when(me) {
+        !in 1..12 -> checkMes = false
+    }
 }
 
 //Genera las tablas de multiplicar, necesita un numero que recibe, del cual genera la tabla.
@@ -49,18 +60,15 @@ fun main() {
     else { // Sino, leo edad y mes. Asigno -1 si hay error en la lectura.
         edad = try {listaEntrada[0].trim().toByte()} catch (_: Exception) {-1}
         mes = try {listaEntrada[1].trim().toByte()} catch (_: Exception) {-1}
-        when(edad){
-            !in 6..12 -> edad = -1
-        }
-        when(mes) {
-            !in 1..12 -> mes = -1
-        }
-        if (edad <= 0) // Si alguno es menor que -1, finaliza el programa
-        {
-            println("Edad: $edad. No se contempla esta edad")
+        chequeoValoresDentroDeRango(edad, mes)
+        if (mes <= 0 || edad <= 0){
+            println("Algo salio mal.")
             println("_".repeat(80))
-        }
-        if (mes <= 0){
+        }else if (!checkEdad) // Si alguno es menor que -1, finaliza el programa
+        {
+            println("Edad: $edad. No se contempla esta edad.")
+            println("_".repeat(80))
+        } else if (!checkMes){
             println("Mes: $mes. El mes es erroneo.")
             println("_".repeat(80))
         }
