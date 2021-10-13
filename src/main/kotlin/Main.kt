@@ -11,12 +11,9 @@ var mes: Byte = 0
 // #####################################
 
 //Entrada generica de texto, la he dividido del codigo pensando que se le daria mas de 1 uso.
-fun entradaTexto(){
+//Ademas, delimita el texto
+fun entradaTextoDelimitador(){
     entrada = readLine() ?: ""
-}
-
-//Se encarga de delimitar el texto en una lista, partiendo por la ",".
-fun delimitarTexto(){
     listaEntrada = entrada.split(",")
 }
 
@@ -35,8 +32,7 @@ fun main() {
     // Aqui tienes que definir las variables que se utilizan
     // Leo desde teclado la edad del alumno y el mes actual
     println("Introduzca la configuración del programa en este formato: <edadDelAlumno>,  <mesActual>")
-    entradaTexto()
-    delimitarTexto()
+    entradaTextoDelimitador()
 
     // Linea Inicial de programa
     println("*".repeat(80))
@@ -53,19 +49,19 @@ fun main() {
     else { // Sino, leo edad y mes. Asigno -1 si hay error en la lectura.
         edad = try {listaEntrada[0].trim().toByte()} catch (_: Exception) {-1}
         mes = try {listaEntrada[1].trim().toByte()} catch (_: Exception) {-1}
-        if (edad !in 6..12){
-            edad = -1
+        when(edad){
+            !in 6..12 -> edad = -1
         }
-        if(mes !in 1..12){
-           mes = -1
+        when(mes) {
+            !in 1..12 -> mes = -1
         }
         if (edad <= 0) // Si alguno es menor que -1, finaliza el programa
         {
-            println("No se contempla esta edad")
+            println("Edad: $edad. No se contempla esta edad")
             println("_".repeat(80))
         }
         if (mes <= 0){
-            println("El mes es erroneo.")
+            println("Mes: $mes. El mes es erroneo.")
             println("_".repeat(80))
         }
         else //Sino, continuo
