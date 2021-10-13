@@ -1,3 +1,4 @@
+// Realizado por Manuel Jesus Segura Garcia
 package examen1
 
 var entrada: String = ""
