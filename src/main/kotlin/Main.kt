@@ -20,6 +20,7 @@ fun entradaTextoDelimitador(){
     listaEntrada = entrada.split(",")
 }
 
+//Comprueba que Edad y Mes estan dentro de sus respectivos rangos
 fun chequeoValoresDentroDeRango(ed: Byte, me: Byte){
     when(ed){
         !in 6..12 -> checkEdad = false
@@ -82,7 +83,7 @@ fun main() {
             // Linea final cabecera
             println("_".repeat(80))
 
-            //Imprime las  tablas en función de
+            //Imprime las tablas de multiplicar
             when (edad) {
                 in 6..8 ->
                     if (mes % 2 != 0) {
